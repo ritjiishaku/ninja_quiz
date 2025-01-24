@@ -1,6 +1,7 @@
 const correctAnswers = ['B', 'B', 'B', 'B'];
 
 const form = document.querySelector('.quiz-form');
+const result = document.querySelector('.result'); // Select the result element
 
 form.addEventListener('submit', e => {
     e.preventDefault();
@@ -16,5 +17,19 @@ form.addEventListener('submit', e => {
         }
     });
 
-    console.log(score); // Log the final score
+    // Show result on the page
+    scrollTo(0, 0); // Scroll to the top of the page
+    result.classList.remove('d-none'); // Make result visible
+
+    let output = 0;
+    const timer = setInterval(() => {
+        result.querySelector('span').textContent = `${output}%`;
+        if (output === score) {
+            clearInterval(timer);
+        } else {
+            output++;
+        }
+    }, 10); // Update every 10ms
 });
+
+
